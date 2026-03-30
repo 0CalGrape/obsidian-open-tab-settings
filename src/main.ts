@@ -333,7 +333,7 @@ export default class OpenTabSettingsPlugin extends Plugin {
     /**
      * Gets all tab groups, sorted by active time.
      */
-    private getAllTabGroups(root: WorkspaceItem): WorkspaceTabs[] {
+    private getAllTabGroups(root: WorkspaceItem): TabGroup[] {
         const tabGroups: Set<TabGroup> = new Set(); // sets are ordered
         this.app.workspace.iterateAllLeaves(leaf => {
             if (leaf.getRoot() == root) {
