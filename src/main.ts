@@ -347,18 +347,9 @@ export default class OpenTabSettingsPlugin extends Plugin {
 
     private ensureLeafOpenOrder(tabGroup: TabGroup) {
         const missingOrderLeaves = tabGroup.children
-            .filter(l => !isEmptyLeaf(l) && !this.leafOpenOrder.has(l.id))
-            .map((leaf, index) => ({
-                leaf,
-                index,
-                activeTime: Number.isFinite(leaf.activeTime) ? leaf.activeTime : Number.POSITIVE_INFINITY,
-            }))
-            .sort((a, b) => {
-                if (a.activeTime !== b.activeTime) return a.activeTime - b.activeTime;
-                return a.index - b.index;
-            });
+            .filter(leaf => !isEmptyLeaf(leaf) && !this.leafOpenOrder.has(leaf.id));
 
-        for (const {leaf} of missingOrderLeaves) {
+        for (const leaf of missingOrderLeaves) {
             this.leafOpenOrder.set(leaf.id, this.nextOpenOrder++);
         }
     }
