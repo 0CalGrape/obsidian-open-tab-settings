@@ -5,6 +5,7 @@ This plugin adds settings to customize how Obsidian opens tabs and navigates bet
 - switch to existing tab instead of opening a duplicate file
 - customize new tab placement and order
 - open new tabs in the opposite pane when using a split workspace
+- limit the maximum number of open tabs per tab group
 
 Using these settings can enable a more familiar workflow for those used to working in editors like VSCode. With the "Always open in new tab" toggled, Obsidian will always open files in a new tab, whether they were opened via links, the quick switcher, file explorer, etc. Never accidentally lose your tabs again!
 
