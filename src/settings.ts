@@ -105,17 +105,22 @@ export class OpenTabSettingsPluginSettingTab extends PluginSettingTab {
                 'When the limit is exceeded, the oldest opened tab is closed. ' +
                 'If open order cannot be determined, the leftmost tab is closed.'
             )
-            .addText(text =>
-                text
+            .addText(text => {
+                text.inputEl.type = 'number';
+                text.inputEl.min = '0';
+                text.inputEl.step = '1';
+
+                return text
                     .setPlaceholder('0')
                     .setValue(String(this.plugin.settings.maxOpenTabs))
                     .onChange(async (value) => {
-                        const parsed = Number.parseInt(value.trim(), 10);
+                        const trimmed = value.trim();
+                        const parsed = Number(trimmed);
                         await this.plugin.updateSettings({
-                            maxOpenTabs: Number.isFinite(parsed) && parsed > 0 ? parsed : 0,
+                            maxOpenTabs: Number.isInteger(parsed) && parsed >= 0 ? parsed : 0,
                         });
-                    })
-            );
+                    });
+            });
 
         new Setting(this.containerEl)
             .setName('Focus explicit new tabs')
